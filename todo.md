@@ -1,6 +1,6 @@
 Todo:
 
-- [ ] create responsive gameboard
+- [x] create responsive gameboard
 - [ ] add tiles to board in random order
 - [ ] calculate winning game state
 - [ ] comparison logic between current state and winning state
