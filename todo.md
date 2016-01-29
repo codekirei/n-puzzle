@@ -2,7 +2,7 @@ Todo:
 
 - [x] create responsive gameboard
 - [ ] add tiles to board in random order
-  - [ ] add tiles to board
+  - [x] add tiles to board
   - [ ] override last tile
   - [ ] push tiles to state in random order
   - [ ] pure render fn to append tiles to board
@@ -17,6 +17,7 @@ Maybe:
 
 - [ ] live GH pages version
 - [ ] docstrings
+- [ ] responsive margin/padding for tiles and board
 - [ ] editorconfig
 - [ ] eslint
 - [ ] tests
