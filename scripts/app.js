@@ -19,9 +19,12 @@ function nPuzzle() {
 
   // calcs
   var grid = Math.sqrt(panels + 1)
-  var tileSize = Math.floor(
-    (board.innerWidth() - parseInt(board.css('padding')) * 2) / grid
-  )
+  var tileSize =
+    Math.floor(
+      ( board.innerWidth() -
+        parseInt(board.css('padding')) * 2
+      ) / grid - 10 // FIXME: magic number
+    )
   var tileSizePx = tileSize + 'px'
 
   // tile factory
@@ -31,7 +34,7 @@ function nPuzzle() {
     var styles =
       { height: tileSizePx
       , width: tileSizePx
-      , lineHeight: tileSize - 10 + 'px' // FIXME: magic number
+      , lineHeight: tileSizePx
       }
 
     return $('<div/>', props).css(styles).html(num)
