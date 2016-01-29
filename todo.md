@@ -8,8 +8,12 @@ Todo:
 - [ ] click/touch handler for swapping moveable tiles
 - [ ] turn counter
 - [ ] pure render fn
+- [ ] xbt
 
 Maybe:
 
+- [ ] tests
 - [ ] undo button with immutable state
 - [ ] tile dragging
+- [ ] resize handler
+- [ ] no-js warning

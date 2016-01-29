@@ -1,0 +1,9 @@
+body {
+  background: white;
+}
+
+#gameboard {
+  background: #333;
+  width: 200px;
+  height: 200px;
+}
