@@ -1,24 +1,37 @@
 'use strict'
 
 //----------------------------------------------------------
-// main app logic
+// utility fns
+//----------------------------------------------------------
+// in-place durstenfeld shuffle
+function shuffle(ar) {
+  for (var i = ar.length - 1; i > 0; i--) {
+    var rand = Math.floor(Math.random() * (i + 1))
+    var hold = ar[i]
+    ar[i] = ar[rand]
+    ar[rand] = hold
+  }
+}
+
+//----------------------------------------------------------
+// application
 //----------------------------------------------------------
 function nPuzzle() {
   // initial setup
   //----------------------------------------------------------
-  var panels = 15
-  var moves = 0
+  var n = 15
+  var tileCount = n + 1
 
-  // elements
+  // pre-init elements
   var board = $('#game__board')
   var score = $('#score')
 
   // state
   var states = []
-  var state
+  var state = { moves: 0 }
 
   // calcs
-  var grid = Math.sqrt(panels + 1)
+  var grid = Math.sqrt(tileCount)
   var tileSize =
     Math.floor(
       ( board.innerWidth() -
@@ -28,29 +41,32 @@ function nPuzzle() {
   var tileSizePx = tileSize + 'px'
 
   // tile factory
-  function buildTile(num) {
-    var props = { 'class': 'tile' }
-    var last = { 'class': 'title last'}
+  function newTile(num) {
+    var props =
+      { hasNum:
+        { 'class': 'tile' }
+      , blank:
+        { 'class': 'tile blank-tile' }
+      }
     var styles =
       { height: tileSizePx
       , width: tileSizePx
       , lineHeight: tileSizePx
       }
-
-    return $('<div/>', props).css(styles).html(num)
-    // return (num === panels + 1)
-    //   ? $('<div/>', last).css(styles).html("")
-    //   : $('<div/>', props).css(styles).html(num)
+    return num === tileCount
+      ? $('<div/>', props.blank).css(styles)
+      : $('<div/>', props.hasNum).css(styles).html(num)
   }
 
+  // generate, shuffle, and append tiles
   var tiles = []
-
-  // generate tiles
-  for(var i = 0; i <= panels; i++) {
-    board.append(buildTile(i + 1))
-    // tiles.push(buildTile(i + 1))
-  }
-
+  for (var i = 1; i <= tileCount; i++) tiles.push(newTile(i))
+  shuffle(tiles)
+  tiles.forEach(
+    function(tile) {
+      board.append(tile)
+    }
+  )
 }
 
 nPuzzle()
