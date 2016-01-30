@@ -3,25 +3,32 @@ Todo:
 - [x] create responsive gameboard
 - [ ] add tiles to board in random order
   - [x] add tiles to board
-  - [ ] override last tile
-  - [ ] push tiles to state in random order
+  - [x] overlay blank tile(s)
+  - [x] shuffle tiles
+  - [ ] push shuffled tiles to state
   - [ ] pure render fn to append tiles to board
 - [ ] calculate winning game state
 - [ ] comparison logic between current state and winning state
-- [ ] calculate which tiles are moveable
+- [ ] get tile elements after appending to board
+- [ ] calculate which tiles are moveable (adjacent to blank)
 - [ ] click/touch handler for swapping moveable tiles
 - [ ] turn counter
 - [ ] xbt
 
 Maybe:
 
+- [ ] tile dragging
+- [ ] undo button with immutable state
+- [ ] resize handler
+
+- [x] dev tools
+  - [x] eslint
+  - [x] browser-sync
 - [ ] live GH pages version
 - [ ] docstrings
 - [ ] responsive margin/padding for tiles and board
+- [ ] change tile count slider
 - [ ] editorconfig
-- [ ] eslint
 - [ ] tests
-- [ ] undo button with immutable state
-- [ ] tile dragging
-- [ ] resize handler
 - [ ] no-js warning
+- [ ] solve button
