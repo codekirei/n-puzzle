@@ -14,8 +14,8 @@ Todo:
 - [x] click handler for swapping moveable tiles
 - [x] turn counter
 - [x] notify victory
-- [ ] test for touch handlers
-- [ ] ensure solvable permutation
+- [x] ensure solvable permutation
+- [x] ensure event handlers are firing on touch events
 - [ ] xbt
 - [ ] FIXMEs / TODOs
 

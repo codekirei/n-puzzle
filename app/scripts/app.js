@@ -1,5 +1,25 @@
 'use strict'
 
+//----------------------------------------------------------
+// pure utility fns
+//----------------------------------------------------------
+
+// durstenfeld shuffle
+//----------------------------------------------------------
+function shuffle(unshuffledAr) {
+  var ar = unshuffledAr.slice(0)
+  for (var i = ar.length - 1; i > 0; i--) {
+    var rand = Math.floor(Math.random() * (i + 1))
+    var hold = ar[i]
+    ar[i] = ar[rand]
+    ar[rand] = hold
+  }
+  return ar
+}
+
+//----------------------------------------------------------
+// Application
+//----------------------------------------------------------
 function nPuzzle(n) {
   //----------------------------------------------------------
   // assign vars
@@ -31,20 +51,40 @@ function nPuzzle(n) {
     }
 
   //----------------------------------------------------------
-  // pure fns
+  // pure closures
   //----------------------------------------------------------
 
-  // durstenfeld shuffle
+  // get index of blank tile in array of values
   //----------------------------------------------------------
-  function shuffle(unshuffledAr) {
-    var ar = unshuffledAr.slice(0)
-    for (var i = ar.length - 1; i > 0; i--) {
-      var rand = Math.floor(Math.random() * (i + 1))
-      var hold = ar[i]
-      ar[i] = ar[rand]
-      ar[rand] = hold
+  function blankTilePos(ar) { return ar.indexOf(tileCount) }
+
+  // test a permutation (array) for solvability
+  //----------------------------------------------------------
+  function isSolvable(permutation) {
+    // copy permutation to prevent mutation
+    var perm = permutation.slice(0)
+
+    // get taxi distance of blank tile to corner
+    var blank = blankTilePos(perm)
+    var row = blank % gridSize + 1
+    var col = Math.ceil((blank + 1) / gridSize)
+    var taxiDistance = (gridSize * 2 - row - col)
+
+    // calculate inviariant
+    var invariant = taxiDistance
+    while (perm.length) {
+      var inversionCt = 0
+      var cur = perm.shift()
+      if (perm.length) {
+        perm.forEach(function(val) {
+          if (val < cur) inversionCt++
+        })
+      }
+      invariant += inversionCt
     }
-    return ar
+
+    // true if even, false if odd
+    return invariant % 2 !== 1
   }
 
   // directional grid calc fns
@@ -72,10 +112,6 @@ function nPuzzle(n) {
       ? $('<div/>', props.blank).css(styles)
       : $('<div/>', props.hasNum).css(styles).html(num)
   }
-
-  // get index of blank tile
-  //----------------------------------------------------------
-  function blankTilePos() { return state.values.indexOf(tileCount) }
 
   // find indices adjacent to an index in an array
   //----------------------------------------------------------
@@ -113,7 +149,7 @@ function nPuzzle(n) {
   }
 
   //----------------------------------------------------------
-  // event handlers
+  // event handlers (mutative)
   //----------------------------------------------------------
 
   // top-level action handler
@@ -148,8 +184,9 @@ function nPuzzle(n) {
   }
 
   function swapTilesAndValues(a, b) {
-    swapState(a, b, 'tiles')
-    swapState(a, b, 'values')
+    ['tiles', 'values'].map(function(str) {
+      swapState(a, b, str)
+    })
   }
 
   function swap(context) {
@@ -174,7 +211,7 @@ function nPuzzle(n) {
 
     // update rest of state
     state.score++
-    state.adjacent = adjacentTo(blankTilePos())
+    state.adjacent = adjacentTo(blankTilePos(state.values))
   }
 
   // bind click handler to clickable tile
@@ -199,14 +236,27 @@ function nPuzzle(n) {
   // generate initial state
   //----------------------------------------------------------
   function init() {
+    // create victory (ascending) state
     for (var i = 1; i <= tileCount; i++) victoryState.push(i)
-    shuffle(victoryState).forEach(
+
+    // generate solvable random permutation
+    var permutation
+    var solvable = false
+    while (!solvable) {
+      permutation = shuffle(victoryState)
+      solvable = isSolvable(permutation)
+    }
+
+    // push permutation to state
+    permutation.forEach(
       function(val) {
         state.tiles.push(tile(val))
         state.values.push(val)
       }
     )
-    state.adjacent = adjacentTo(blankTilePos())
+
+    // find movable tiles
+    state.adjacent = adjacentTo(blankTilePos(state.values))
   }
 
   // render state to DOM
