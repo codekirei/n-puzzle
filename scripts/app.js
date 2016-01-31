@@ -212,24 +212,34 @@ function nPuzzle(n) {
   // render state to DOM
   //----------------------------------------------------------
   function render() {
-    console.log(state.values)
     // clear board
     board.empty()
 
     // TODO branch for victory state
 
-    // bind click handlers and render tiles
+    // copy tiles
     var tiles = state.tiles.slice(0)
-    Object.keys(state.adjacent).map(
-      function(direction) {
-        bindClickHandler(tiles, direction)
-      }
-    )
+
+    // bind click handlers
+    if (!state.victory) {
+      Object.keys(state.adjacent).map(
+        function(direction) {
+          bindClickHandler(tiles, direction)
+        }
+      )
+    }
+
+    // append tiles to DOM
     tiles.forEach(
       function(t) { board.append(t) }
     )
-    // TODO: set score
+
+    // print score
     score.html(state.score)
+
+    if (state.victory) {
+      alert('You won!')
+    }
   }
 
   //----------------------------------------------------------
