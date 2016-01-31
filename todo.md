@@ -1,12 +1,12 @@
 Todo:
 
 - [x] create responsive gameboard
-- [ ] add tiles to board in random order
+- [x] add tiles to board in random order
   - [x] add tiles to board
   - [x] overlay blank tile(s)
   - [x] shuffle tiles
-  - [ ] push shuffled tiles to state
-  - [ ] pure render fn to append tiles to board
+  - [x] push shuffled tiles to state
+  - [x] pure render fn to append tiles to board
 - [ ] calculate winning game state
 - [ ] comparison logic between current state and winning state
 - [ ] get tile elements after appending to board
@@ -14,6 +14,7 @@ Todo:
 - [ ] click/touch handler for swapping moveable tiles
 - [ ] turn counter
 - [ ] xbt
+- [ ] FIXMEs / TODOs
 
 Maybe:
 
