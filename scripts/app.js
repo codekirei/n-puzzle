@@ -25,21 +25,17 @@ function nPuzzle(n) {
   // assign vars
   //----------------------------------------------------------
   var tileCount = n + 1
+  var gridSize = Math.sqrt(tileCount)
+  var gridSizeLessOne = gridSize - 1
+  var tileStyles =
+    { height: void 0
+    , width: void 0
+    , lineHeight: void 0
+    }
 
   // elements
   var board = $('#game__board')
   var score = $('#score')
-
-  // calcs
-  var gridSize = Math.sqrt(tileCount)
-  var gridSizeLessOne = gridSize - 1
-  var tileSize =
-    Math.floor(
-      (board.innerWidth() - parseInt(board.css('padding')) * 2) /
-      gridSize -
-      10 // FIXME: magic number
-    )
-  var tileSizePx = tileSize + 'px'
 
   // state
   var victoryState = []
@@ -68,7 +64,7 @@ function nPuzzle(n) {
     var blank = blankTilePos(perm)
     var row = blank % gridSize + 1
     var col = Math.ceil((blank + 1) / gridSize)
-    var taxiDistance = (gridSize * 2 - row - col)
+    var taxiDistance = gridSize * 2 - row - col
 
     // calculate inviariant
     var invariant = taxiDistance
@@ -103,14 +99,9 @@ function nPuzzle(n) {
       , blank:
         { 'class': 'tile blank-tile' }
       }
-    var styles =
-      { height: tileSizePx
-      , width: tileSizePx
-      , lineHeight: tileSizePx
-      }
     return num === tileCount
-      ? $('<div/>', props.blank).css(styles)
-      : $('<div/>', props.hasNum).css(styles).html(num)
+      ? $('<div/>', props.blank).css(tileStyles)
+      : $('<div/>', props.hasNum).css(tileStyles).html(num)
   }
 
   // find indices adjacent to an index in an array
@@ -149,7 +140,7 @@ function nPuzzle(n) {
   }
 
   //----------------------------------------------------------
-  // event handlers (mutative)
+  // game event handlers (mutative)
   //----------------------------------------------------------
 
   // top-level action handler
@@ -183,10 +174,11 @@ function nPuzzle(n) {
     ar[a] = hold
   }
 
-  function swapTilesAndValues(a, b) {
+  function swapAndIncrementScore(a, b) {
     ['tiles', 'values'].map(function(str) {
       swapState(a, b, str)
     })
+    state.score++
   }
 
   function swap(context) {
@@ -194,23 +186,21 @@ function nPuzzle(n) {
 
     switch (context.direction) {
       case 'left':
-        swapTilesAndValues(i, right(i))
+        swapAndIncrementScore(i, right(i))
         break
       case 'right':
-        swapTilesAndValues(i, left(i))
+        swapAndIncrementScore(i, left(i))
         break
       case 'above':
-        swapTilesAndValues(i, below(i))
+        swapAndIncrementScore(i, below(i))
         break
       case 'below':
-        swapTilesAndValues(i, above(i))
+        swapAndIncrementScore(i, above(i))
         break
       default:
         console.log('unknown action')
     }
 
-    // update rest of state
-    state.score++
     state.adjacent = adjacentTo(blankTilePos(state.values))
   }
 
@@ -233,9 +223,25 @@ function nPuzzle(n) {
   // other mutative fns
   //----------------------------------------------------------
 
+  // generate tileStyles object
+  //----------------------------------------------------------
+  function genTileStyles() {
+    var tileSize = Math.floor(
+      (board.innerWidth() - parseInt(board.css('padding')) * 2) /
+      gridSize -
+      10 // FIXME: magic number
+    ) + 'px'
+    Object.keys(tileStyles).map(function(prop) {
+      tileStyles[prop] = tileSize
+    })
+  }
+
   // generate initial state
   //----------------------------------------------------------
   function init() {
+    // calculate tile sizes
+    genTileStyles()
+
     // create victory (ascending) state
     for (var i = 1; i <= tileCount; i++) victoryState.push(i)
 
@@ -268,7 +274,7 @@ function nPuzzle(n) {
     // TODO branch for victory state
 
     // copy tiles
-    var tiles = state.tiles.slice(0)
+    var tiles = state.tiles.slice(0) // TODO do I need to do this here?
 
     // bind click handlers
     if (!state.victory) {
@@ -291,6 +297,23 @@ function nPuzzle(n) {
       alert('You won!')
     }
   }
+
+  //----------------------------------------------------------
+  // handle window resize
+  //----------------------------------------------------------
+  function resizeHandler(e) {
+    genTileStyles()
+    state.tiles.map(function(t) {
+      t.css(tileStyles)
+    })
+    render()
+  }
+
+  var debounceResize
+  $(window).resize(function(e) {
+    clearTimeout(debounceResize)
+    debounceResize = setTimeout(resizeHandler, 50)
+  })
 
   //----------------------------------------------------------
   // initialize
