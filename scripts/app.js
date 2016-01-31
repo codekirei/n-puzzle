@@ -17,7 +17,7 @@ function shuffle(ar) {
 // application
 //----------------------------------------------------------
 function nPuzzle() {
-  // initial setup
+  // setup
   //----------------------------------------------------------
   var n = 15
   var tileCount = n + 1
@@ -28,20 +28,24 @@ function nPuzzle() {
 
   // state
   var states = []
-  var state = { moves: 0 }
+  var state =
+    { moves: 0
+    , tiles: []
+    }
 
   // calcs
-  var grid = Math.sqrt(tileCount)
+  var rows = Math.sqrt(tileCount)
   var tileSize =
     Math.floor(
       ( board.innerWidth() -
         parseInt(board.css('padding')) * 2
-      ) / grid - 10 // FIXME: magic number
+      ) / rows - 10 // FIXME: magic number
     )
   var tileSizePx = tileSize + 'px'
 
-  // tile factory
-  function newTile(num) {
+  // create a tile div
+  //----------------------------------------------------------
+  function tile(num) {
     var props =
       { hasNum:
         { 'class': 'tile' }
@@ -58,15 +62,35 @@ function nPuzzle() {
       : $('<div/>', props.hasNum).css(styles).html(num)
   }
 
-  // generate, shuffle, and append tiles
-  var tiles = []
-  for (var i = 1; i <= tileCount; i++) tiles.push(newTile(i))
-  shuffle(tiles)
-  tiles.forEach(
-    function(tile) {
-      board.append(tile)
-    }
-  )
+  // generate and randomize all tiles
+  //----------------------------------------------------------
+  function generateTiles() {
+    var tiles = []
+    for (var i = 1; i <= tileCount; i++) tiles.push(tile(i))
+    shuffle(tiles)
+    tiles.forEach(
+      function(t) { state.tiles.push(t) }
+    )
+  }
+
+  // pure render fn
+  //----------------------------------------------------------
+  function render(currentState) {
+    // clear board
+    board.empty()
+
+    // fill board with tiles
+    currentState.tiles.forEach(
+      function(t) { board.append(t) }
+    )
+
+    // TODO: set score
+  }
+
+  // initialize
+  //----------------------------------------------------------
+  generateTiles()
+  render(state)
 }
 
 nPuzzle()
