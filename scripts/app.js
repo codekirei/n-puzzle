@@ -3,14 +3,16 @@
 //----------------------------------------------------------
 // utility fns
 //----------------------------------------------------------
-// in-place durstenfeld shuffle
-function shuffle(ar) {
+// durstenfeld shuffle
+function shuffle(unshuffledAr) {
+  var ar = unshuffledAr.slice(0)
   for (var i = ar.length - 1; i > 0; i--) {
     var rand = Math.floor(Math.random() * (i + 1))
     var hold = ar[i]
     ar[i] = ar[rand]
     ar[rand] = hold
   }
+  return ar
 }
 
 //----------------------------------------------------------
@@ -27,10 +29,12 @@ function nPuzzle() {
   var score = $('#score')
 
   // state
+  var victoryState = []
   var states = []
   var state =
     { moves: 0
     , tiles: []
+    , values: []
     }
 
   // calcs
@@ -62,24 +66,23 @@ function nPuzzle() {
       : $('<div/>', props.hasNum).css(styles).html(num)
   }
 
-  // generate and randomize all tiles
+  // generate initial state
   //----------------------------------------------------------
-  function generateTiles() {
-    var tiles = []
-    for (var i = 1; i <= tileCount; i++) tiles.push(tile(i))
-    shuffle(tiles)
-    tiles.forEach(
-      function(t) { state.tiles.push(t) }
+  function initState() {
+    for (var i = 1; i <= tileCount; i++) victoryState.push(i)
+    shuffle(victoryState).forEach(
+      function(val) {
+        state.tiles.push(tile(val))
+        state.values.push(val)
+      }
     )
   }
 
   // pure render fn
   //----------------------------------------------------------
   function render(currentState) {
-    // clear board
     board.empty()
 
-    // fill board with tiles
     currentState.tiles.forEach(
       function(t) { board.append(t) }
     )
@@ -87,9 +90,29 @@ function nPuzzle() {
     // TODO: set score
   }
 
+  // find blank tile in tile array
+  //----------------------------------------------------------
+  function blankTilePos(currentState) {
+    return currentState.values.indexOf(tileCount)
+  }
+
+  // check if current state is victory state
+  //----------------------------------------------------------
+  function isVictory(currentState) {
+    var i = 0
+    var victory = false
+    while (i < tileCount) {
+      if (currentState.values[i] === victoryState[i]) i++
+      else break
+      if (i === tileCount) victory = true
+    }
+    return victory
+  }
+
   // initialize
   //----------------------------------------------------------
-  generateTiles()
+  initState()
+  console.log(isVictory(state))
   render(state)
 }
 
