@@ -7,8 +7,8 @@ Todo:
   - [x] shuffle tiles
   - [x] push shuffled tiles to state
   - [x] pure render fn to append tiles to board
-- [ ] calculate winning game state
-- [ ] comparison logic between current state and winning state
+- [x] calculate winning game state
+- [x] comparison logic between current state and winning state
 - [ ] get tile elements after appending to board
 - [ ] calculate which tiles are moveable (adjacent to blank)
 - [ ] click/touch handler for swapping moveable tiles
