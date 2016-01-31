@@ -12,10 +12,11 @@ Todo:
 - [x] calculate which tiles are moveable (adjacent to blank)
 - [x] bind event handler to movable tiles
 - [x] click handler for swapping moveable tiles
-- [ ] test for touch handlers
 - [x] turn counter
+- [x] notify victory
+- [ ] test for touch handlers
+- [ ] ensure solvable permutation
 - [ ] xbt
-- [ ] notify victory
 - [ ] FIXMEs / TODOs
 
 Maybe:
