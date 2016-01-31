@@ -38,12 +38,13 @@ function nPuzzle() {
     }
 
   // calcs
-  var rows = Math.sqrt(tileCount)
+  var gridSize = Math.sqrt(tileCount)
+  var gridSizeLessOne = gridSize - 1
   var tileSize =
     Math.floor(
       ( board.innerWidth() -
         parseInt(board.css('padding')) * 2
-      ) / rows - 10 // FIXME: magic number
+      ) / gridSize - 10 // FIXME: magic number
     )
   var tileSizePx = tileSize + 'px'
 
@@ -96,6 +97,30 @@ function nPuzzle() {
     return currentState.values.indexOf(tileCount)
   }
 
+  // find indices adjacent to index in array
+  //----------------------------------------------------------
+  function adjacentTo(i) {
+    var adjacent = {}
+
+    adjacent.below = i + gridSize < tileCount
+      ? i + gridSize
+      : void 0
+
+    adjacent.above = i - gridSize >= 0
+      ? i - gridSize
+      : void 0
+
+    adjacent.right = i % gridSize < gridSizeLessOne
+      ? i + 1
+      : void 0
+
+    adjacent.left = i % gridSize > 0
+      ? i - 1
+      : void 0
+
+    return adjacent
+  }
+
   // check if current state is victory state
   //----------------------------------------------------------
   function isVictory(currentState) {
@@ -112,7 +137,6 @@ function nPuzzle() {
   // initialize
   //----------------------------------------------------------
   initState()
-  console.log(isVictory(state))
   render(state)
 }
 
