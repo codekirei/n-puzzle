@@ -11,9 +11,11 @@ Todo:
 - [x] comparison logic between current state and winning state
 - [x] calculate which tiles are moveable (adjacent to blank)
 - [x] bind event handler to movable tiles
-- [ ] click/touch handler for swapping moveable tiles
-- [ ] turn counter
+- [x] click handler for swapping moveable tiles
+- [ ] test for touch handlers
+- [x] turn counter
 - [ ] xbt
+- [ ] notify victory
 - [ ] FIXMEs / TODOs
 
 Maybe:
