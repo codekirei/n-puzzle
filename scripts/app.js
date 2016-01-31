@@ -31,7 +31,7 @@ function nPuzzle(n) {
   var victoryState = []
   var states = []
   var state =
-    { moves: 0
+    { score: 0
     , tiles: []
     , values: []
     }
@@ -46,6 +46,24 @@ function nPuzzle(n) {
       ) / gridSize - 10 // FIXME: magic number
     )
   var tileSizePx = tileSize + 'px'
+
+  // directional grid calc fns
+  //----------------------------------------------------------
+  function above(i) {
+    return i - gridSize
+  }
+
+  function below(i) {
+    return i + gridSize
+  }
+
+  function left(i) {
+    return i - 1
+  }
+
+  function right(i) {
+    return i + 1
+  }
 
   // create a tile div
   //----------------------------------------------------------
@@ -77,20 +95,18 @@ function nPuzzle(n) {
   function adjacentTo(i) {
     var adjacent = {}
 
-    adjacent.below = i + gridSize < tileCount
-      ? i + gridSize
-      : void 0
+    var _below = below(i)
+    adjacent.below = _below < tileCount ? _below : void 0
 
-    adjacent.above = i - gridSize >= 0
-      ? i - gridSize
-      : void 0
+    var _above = above(i)
+    adjacent.above = _above >= 0 ? _above : void 0
 
     adjacent.right = i % gridSize < gridSizeLessOne
-      ? i + 1
+      ? right(i)
       : void 0
 
     adjacent.left = i % gridSize > 0
-      ? i - 1
+      ? left(i)
       : void 0
 
     return adjacent
@@ -152,6 +168,7 @@ function nPuzzle(n) {
       function(t) { board.append(t) }
     )
     // TODO: set score
+    score.html(state.score)
   }
 
   // initialize
@@ -160,5 +177,5 @@ function nPuzzle(n) {
   render()
 }
 
-nPuzzle(8)
-// nPuzzle(15)
+// nPuzzle(8)
+nPuzzle(15)
