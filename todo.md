@@ -23,17 +23,17 @@ Maybe:
 
 - [ ] tile dragging
 - [ ] undo button with immutable state
-- [ ] resize handler
-- [ ] "Victory! Play again" frame
+- [x] resize handler
+- [ ] "Victory! Play again" dialog
+- [ ] live GH pages version
 
 - [x] dev tools
   - [x] eslint
   - [x] browser-sync
-- [ ] live GH pages version
 - [ ] docstrings
 - [ ] responsive margin/padding for tiles and board
 - [ ] change tile count slider
 - [ ] editorconfig
 - [ ] tests
-- [ ] no-js warning
+- [ ] no-js dialog
 - [ ] solve button
