@@ -9,8 +9,8 @@ Todo:
   - [x] pure render fn to append tiles to board
 - [x] calculate winning game state
 - [x] comparison logic between current state and winning state
-- [ ] get tile elements after appending to board
 - [x] calculate which tiles are moveable (adjacent to blank)
+- [x] bind event handler to movable tiles
 - [ ] click/touch handler for swapping moveable tiles
 - [ ] turn counter
 - [ ] xbt
@@ -21,6 +21,7 @@ Maybe:
 - [ ] tile dragging
 - [ ] undo button with immutable state
 - [ ] resize handler
+- [ ] "Victory! Play again" frame
 
 - [x] dev tools
   - [x] eslint
