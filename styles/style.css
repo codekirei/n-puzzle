@@ -92,6 +92,9 @@ body {
   padding: 6px 10px;
   border-radius: 4px;
 }
+.button:active {
+  margin-top: 2px;
+}
 @media only screen and (min-width: 960px) {
   .button {
     padding: 10px 15px;
