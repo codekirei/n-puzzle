@@ -27,15 +27,18 @@ function nPuzzle(n) {
   var tileCount = n + 1
   var gridSize = Math.sqrt(tileCount)
   var gridSizeLessOne = gridSize - 1
+
+  // elements
+  var board = $('#game__board')
+  var score = $('#score')
+
+  // styles
+  var bp = 960
   var tileStyles =
     { height: void 0
     , width: void 0
     , lineHeight: void 0
     }
-
-  // elements
-  var board = $('#game__board')
-  var score = $('#score')
 
   // state
   var victoryState = []
@@ -226,11 +229,12 @@ function nPuzzle(n) {
   // generate tileStyles object
   //----------------------------------------------------------
   function genTileStyles() {
-    var tileSize = Math.floor(
-      (board.innerWidth() - parseInt(board.css('padding')) * 2) /
-      gridSize -
-      10 // FIXME: magic number
-    ) + 'px'
+    var width =
+      { window: $(window).width()
+      , board: board.width()
+      }
+    var tilePadding = width.window >= bp ? 10 : 6
+    var tileSize = Math.floor(width.board / gridSize - tilePadding) + 'px'
     Object.keys(tileStyles).map(function(prop) {
       tileStyles[prop] = tileSize
     })

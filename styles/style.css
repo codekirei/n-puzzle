@@ -86,22 +86,52 @@ body {
   }
 }
 
+.button {
+  display: block;
+  cursor: pointer;
+  padding: 6px 10px;
+  border-radius: 4px;
+}
+@media only screen and (min-width: 960px) {
+  .button {
+    padding: 10px 15px;
+    border-radius: 5px;
+  }
+}
+
+/************************************************************
+ * layout -- board
+ ***********************************************************/
 #game__board {
   width: 100%;
   margin-top: 20px;
-  padding: 5px;
+  padding: 3px;
   overflow: auto;
   border-radius: 10px;
+}
+@media only screen and (min-width: 960px) {
+  #game__board {
+    padding: 5px;
+  }
 }
 
 .tile {
   float: left;
   text-align: center;
-  margin: 5px;
-  border-radius: 5px;
+  margin: 3px;
+  border-radius: 4px;
   cursor: default;
 }
+@media only screen and (min-width: 960px) {
+  .tile {
+    margin: 5px;
+    border-radius: 5px;
+  }
+}
 
+/************************************************************
+ * layout -- footer
+ ***********************************************************/
 .game__footer {
   overflow: auto;
   margin-top: 10px;
@@ -122,19 +152,6 @@ body {
 @media only screen and (min-width: 960px) {
   .game__score {
     line-height: 50px;
-  }
-}
-
-.button {
-  display: block;
-  cursor: pointer;
-  padding: 6px 10px;
-  border-radius: 4px;
-}
-@media only screen and (min-width: 960px) {
-  .button {
-    padding: 10px 15px;
-    border-radius: 5px;
   }
 }
 
