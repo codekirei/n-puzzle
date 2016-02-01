@@ -211,10 +211,10 @@ function nPuzzle(n) {
 
   // bind click handler to clickable tile
   //----------------------------------------------------------
-  function bindClickHandler(tiles, direction) {
+  function bindClickHandler(direction) {
     var i = state.adjacent[direction]
     if (typeof i !== 'undefined') {
-      tiles[i].click(function(e) {
+      state.tiles[i].click(function(e) {
         action('SWAP',
           { direction: direction
           , i: i
@@ -280,22 +280,13 @@ function nPuzzle(n) {
     // clear board
     board.empty()
 
-    // TODO branch for victory state
-
-    // copy tiles
-    var tiles = state.tiles.slice(0) // TODO do I need to do this here?
-
     // bind click handlers
     if (!state.victory) {
-      Object.keys(state.adjacent).map(
-        function(direction) {
-          bindClickHandler(tiles, direction)
-        }
-      )
+      Object.keys(state.adjacent).map(bindClickHandler)
     }
 
     // append tiles to DOM
-    tiles.forEach(
+    state.tiles.forEach(
       function(t) { board.append(t) }
     )
 
