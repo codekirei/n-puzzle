@@ -8,69 +8,136 @@
   box-sizing: border-box;
 }
 
-/************************************************************
- * base
- ***********************************************************/
 body {
-  background: #BBB;
-  font-family: 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-}
-
-/************************************************************
- * game and game elements
- ***********************************************************/
-.game {
-  width: 80%;
-  max-width: 300px;
-  margin: 0 auto;
-}
-
-#game__board {
-  background: #333;
-  width: 100%;
-  margin: 20px 0;
-  padding: 5px;
-  overflow: auto;
-  border-radius: 10px;
-}
-
-.game__score,
-.tile {
-  color: #333;
-  font-size: 20px;
   user-select: none;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
 }
 
-.game__score {
-  text-align: center;
-}
-
-.tile {
-  float: left;
-  background: #EEE;
-  margin: 5px;
-  text-align: center;
-  font-weight: bold;
-  border-radius: 5px;
-  cursor: default;
-}
-
-.tile.blank-tile {
-  background: #333;
-}
-
 /************************************************************
- * media queries
+ * typography
  ***********************************************************/
+body {
+  font-family: 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+.game__score,
+.tile {
+  font-size: 20px;
+}
 @media only screen and (min-width: 960px) {
-  .game {
-    max-width: 500px;
-  }
   .game__score,
   .tile {
     font-size: 30px;
   }
+}
+
+.button {
+  font-size: 16px;
+}
+@media only screen and (min-width: 960px) {
+  .button {
+    font-size: 24px;
+  }
+}
+
+.tile {
+  font-weight: bold;
+}
+
+/************************************************************
+ * color
+ ***********************************************************/
+body {
+  background: #BBB;
+}
+
+.game__score,
+.tile {
+  color: #333;
+}
+
+#game__board,
+.tile.blank-tile,
+.button {
+  background: #333;
+}
+
+.tile {
+  background: #EEE;
+}
+
+.button {
+  color: #EEE;
+}
+
+/************************************************************
+ * layout
+ ***********************************************************/
+.game {
+  width: 80%;
+  max-width: 300px;
+  margin: 0 auto;
+}
+@media only screen and (min-width: 960px) {
+  .game {
+    max-width: 500px;
+  }
+}
+
+#game__board {
+  width: 100%;
+  margin-top: 20px;
+  padding: 5px;
+  overflow: auto;
+  border-radius: 10px;
+}
+
+.tile {
+  float: left;
+  text-align: center;
+  margin: 5px;
+  border-radius: 5px;
+  cursor: default;
+}
+
+.game__footer {
+  overflow: auto;
+  margin-top: 10px;
+  padding: 0 5px;
+}
+@media only screen and (min-width: 960px) {
+  .game__footer {
+    margin-top: 20px;
+  }
+}
+
+.game__score {
+  display: inline;
+  cursor: default;
+  float: left;
+  line-height: 30px;
+}
+@media only screen and (min-width: 960px) {
+  .game__score {
+    line-height: 50px;
+  }
+}
+
+.button {
+  display: block;
+  cursor: pointer;
+  padding: 6px 10px;
+  border-radius: 4px;
+}
+@media only screen and (min-width: 960px) {
+  .button {
+    padding: 10px 15px;
+    border-radius: 5px;
+  }
+}
+
+.game__undo {
+  float: right;
 }
