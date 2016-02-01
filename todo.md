@@ -16,8 +16,8 @@ Todo:
 - [x] notify victory
 - [x] ensure solvable permutation
 - [x] ensure event handlers are firing on touch events
-- [ ] xbt
 - [ ] FIXMEs / TODOs
+- [ ] xbt
 
 Maybe:
 
@@ -27,12 +27,12 @@ Maybe:
   - [ ] editorconfig
 - [x] resize handler
 - [x] live GH pages version
+- [x] responsive margin/padding for tiles and board
 - [ ] tile dragging
 - [ ] undo button with immutable state
-- [x] responsive margin/padding for tiles and board
 
-- [ ] "Victory! Play again" dialog
-- [ ] docstrings
+- [ ] Victory dialog with play again button
+- [ ] fn docstrings
 - [ ] change tile count slider
 - [ ] tests
 - [ ] no-js dialog
