@@ -1,5 +1,7 @@
 Todo:
 
+- [x] eslint
+- [x] browser-sync
 - [x] create responsive gameboard
 - [x] add tiles to board in random order
   - [x] add tiles to board
@@ -26,15 +28,25 @@ Maybe:
 - [x] responsive margin/padding for tiles and board
 - [x] undo button with immutable state
 - [ ] tile dragging
-- [ ] dev tools
-  - [x] eslint
-  - [x] browser-sync
-  - [ ] editorconfig
 
-- [ ] Victory dialog with play again button
-- [ ] fn docstrings
-- [ ] change tile count slider
-- [ ] tests
-- [ ] no-js dialog
-- [ ] solve button
-- [ ] better err handling
+Future:
+
+- [ ] functionality
+  - [ ] reset button (same perm)
+  - [ ] dialogs
+    - [ ] Victory dialog with play again button
+    - [ ] tutorial dialog
+  - [ ] change tile count slider
+  - [ ] solve button
+- [ ] presentation
+  - [ ] animations/fades
+  - [ ] no-js dialog
+- [ ] code
+  - [ ] front-end tests
+  - [ ] fn docstrings
+  - [ ] modularity
+  - [ ] err handling
+  - [ ] editorconfig
+  - [ ] tests
+    - [ ] DOM (jest)
+    - [ ] xbt
