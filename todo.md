@@ -21,15 +21,15 @@ Todo:
 
 Maybe:
 
+- [x] resize handler
+- [x] live GH pages version
+- [x] responsive margin/padding for tiles and board
+- [x] undo button with immutable state
+- [ ] tile dragging
 - [ ] dev tools
   - [x] eslint
   - [x] browser-sync
   - [ ] editorconfig
-- [x] resize handler
-- [x] live GH pages version
-- [x] responsive margin/padding for tiles and board
-- [ ] tile dragging
-- [ ] undo button with immutable state
 
 - [ ] Victory dialog with play again button
 - [ ] fn docstrings
@@ -37,3 +37,4 @@ Maybe:
 - [ ] tests
 - [ ] no-js dialog
 - [ ] solve button
+- [ ] better err handling

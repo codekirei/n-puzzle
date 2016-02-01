@@ -31,6 +31,7 @@ function nPuzzle(n) {
   // elements
   var board = $('#game__board')
   var score = $('#score')
+  var undo = $('.game__undo')
 
   // styles
   var bp = 960
@@ -149,13 +150,14 @@ function nPuzzle(n) {
   // top-level action handler
   //----------------------------------------------------------
   function action(name, context) {
-    // snapshot state to history
-    history.push($.extend(true, {}, state))
-
-    // mutate state
+    // handle action
     switch (name) {
       case 'SWAP':
+        history.push($.extend(true, {}, state))
         swap(context)
+        break
+      case 'UNDO':
+        if (history.length) state = history.pop()
         break
       default:
         console.log('unknown action')
@@ -240,7 +242,7 @@ function nPuzzle(n) {
     })
   }
 
-  // generate initial state
+  // initialize state and some event handlers
   //----------------------------------------------------------
   function init() {
     // calculate tile sizes
@@ -267,6 +269,9 @@ function nPuzzle(n) {
 
     // find movable tiles
     state.adjacent = adjacentTo(blankTilePos(state.values))
+
+    // add click handler for undo button
+    undo.click(function(e) { action('UNDO') })
   }
 
   // render state to DOM
@@ -297,7 +302,9 @@ function nPuzzle(n) {
     // print score
     score.html(state.score)
 
+    // handle victory state
     if (state.victory) {
+      undo.off('click')
       alert('You won!')
     }
   }
