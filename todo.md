@@ -18,8 +18,7 @@ Todo:
 - [x] notify victory
 - [x] ensure solvable permutation
 - [x] ensure event handlers are firing on touch events
-- [ ] FIXMEs / TODOs
-- [ ] xbt
+- [x] FIXMEs / TODOs
 
 Maybe:
 
@@ -27,11 +26,11 @@ Maybe:
 - [x] live GH pages version
 - [x] responsive margin/padding for tiles and board
 - [x] undo button with immutable state
-- [ ] tile dragging
 
 Future:
 
 - [ ] functionality
+  - [ ] tile dragging (jqueryUI + touch-punch?)
   - [ ] reset button (same perm)
   - [ ] dialogs
     - [ ] Victory dialog with play again button
