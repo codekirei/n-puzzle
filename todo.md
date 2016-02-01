@@ -21,19 +21,19 @@ Todo:
 
 Maybe:
 
-- [ ] tile dragging
-- [ ] undo button with immutable state
-- [x] resize handler
-- [ ] "Victory! Play again" dialog
-- [ ] live GH pages version
-
-- [x] dev tools
+- [ ] dev tools
   - [x] eslint
   - [x] browser-sync
+  - [ ] editorconfig
+- [x] resize handler
+- [x] live GH pages version
+- [ ] tile dragging
+- [ ] undo button with immutable state
+- [x] responsive margin/padding for tiles and board
+
+- [ ] "Victory! Play again" dialog
 - [ ] docstrings
-- [ ] responsive margin/padding for tiles and board
 - [ ] change tile count slider
-- [ ] editorconfig
 - [ ] tests
 - [ ] no-js dialog
 - [ ] solve button
